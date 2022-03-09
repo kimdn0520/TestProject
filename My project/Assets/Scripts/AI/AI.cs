@@ -8,6 +8,7 @@ using UnityEngine;
 public class AI : MonoBehaviour
 {
     public Transform transform;
+    public Animator animator;
 
     Sequence root = new Sequence();         // 시퀀스로 루트 노드를 만들어준다. 루트 노드는 하나의 셀렉터 혹은 시퀀스를 갖는다.
 
@@ -24,11 +25,14 @@ public class AI : MonoBehaviour
 
     public GameObject player;
     public float speed;
+    public float atkCoolTime;
     
     void Awake()
     {
         transform = GetComponent<Transform>();
+        animator = GetComponent<Animator>();
         speed = 5.0f;
+        atkCoolTime = 2.0f;
 
         aiCanAttack = new AICanAttack(this);
         aiAttack = new AIAttack(this);

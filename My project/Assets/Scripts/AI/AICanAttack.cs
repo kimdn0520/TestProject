@@ -23,7 +23,7 @@ public class AICanAttack : Node
             }
         }
 
-        _ai.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+        _ai.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
 
         return false;
     }

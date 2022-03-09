@@ -13,7 +13,7 @@ public class AIIdle : Node
 
     public bool Invoke()
     {
-        // Idle 동작
+        _ai.animator.Play("AI_Idle");   // 임시 
 
         return true;
     }

@@ -13,7 +13,7 @@ public class Player_Idle : State
 
     void State.OnStart()
     {
-        Debug.Log("Idle 상태 진입");
+        // Debug.Log("Idle 상태 진입");
     }
 
     void State.FixedUpdate()
@@ -31,6 +31,6 @@ public class Player_Idle : State
 
     void State.OnEnd()
     {
-        Debug.Log("Idle 상태 탈출");
+        // Debug.Log("Idle 상태 탈출");
     }
 }

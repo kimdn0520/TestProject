@@ -13,7 +13,7 @@ public class Player_Walk : State
 
     void State.OnStart()
     {
-        Debug.Log("Walk 상태 진입");
+        // Debug.Log("Walk 상태 진입");
     }
 
     void State.FixedUpdate()
@@ -33,6 +33,6 @@ public class Player_Walk : State
 
     void State.OnEnd()
     {
-        Debug.Log("Walk 상태 탈출");
+        // Debug.Log("Walk 상태 탈출");
     }
 }

@@ -11,6 +11,11 @@ public class AICanTrack : Node
         _ai = ai;
     }
 
+    public void OnStart()
+    {
+
+    }
+
     public bool Invoke()
     {
         if (_ai.player != null)
@@ -19,5 +24,10 @@ public class AICanTrack : Node
         }
 
         return false;
+    }
+
+    public void OnEnd()
+    {
+
     }
 }

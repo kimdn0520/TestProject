@@ -11,8 +11,17 @@ public class AICanAttack : Node
         _ai = ai;
     }
 
+    public void OnStart()
+    {
+
+    }
+
     public bool Invoke()
     {
+        // 공격 중이라면 true
+        if (_ai.isAttack)
+            return true;
+
         if(_ai.player != null)
         {
             float dist = (_ai.player.GetComponent<Transform>().position - _ai.GetComponent<Transform>().position).magnitude;
@@ -26,5 +35,10 @@ public class AICanAttack : Node
         _ai.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
 
         return false;
+    }
+
+    public void OnEnd()
+    {
+
     }
 }

@@ -9,6 +9,7 @@ public class AI : MonoBehaviour
 {
     public Transform transform;
     public Animator animator;
+    public Node currentNode;
 
     Sequence root = new Sequence();         // 시퀀스로 루트 노드를 만들어준다. 루트 노드는 하나의 셀렉터 혹은 시퀀스를 갖는다.
 
@@ -26,19 +27,25 @@ public class AI : MonoBehaviour
     public GameObject player;
     public float speed;
     public float atkCoolTime;
-    
+    public float curAtkTimer;
+    public bool isAttack;
+
     void Awake()
     {
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         speed = 5.0f;
         atkCoolTime = 2.0f;
+        curAtkTimer = 2.0f;
+        isAttack = false;
 
         aiCanAttack = new AICanAttack(this);
         aiAttack = new AIAttack(this);
         aiCanTrack = new AICanTrack(this);
         aiTrack = new AITrack(this);
         aiIdle = new AIIdle(this);
+
+        currentNode = aiIdle; 
 
         root.AddChild(selector1);           // 루트 child로 selector 추가
 
@@ -56,6 +63,12 @@ public class AI : MonoBehaviour
     private void Update()
     {
         root.Invoke();
+
+        // 쿨타임 등..
+        if (curAtkTimer >= 2.0f)
+            curAtkTimer = 2.0f;
+        else
+            curAtkTimer += Time.deltaTime;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -72,5 +85,15 @@ public class AI : MonoBehaviour
         {
             player = null;
         }
+    }
+
+    public void IsAttackTrue()
+    {
+        isAttack = true;
+    }
+
+    public void IsAttackFalse()
+    {
+        isAttack = false;
     }
 }

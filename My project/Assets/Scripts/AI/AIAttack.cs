@@ -11,10 +11,36 @@ public class AIAttack : Node
         _ai = ai;
     }
 
+    public void OnStart()
+    {
+        _ai.currentNode = this;
+        // _ai.animator.Play("AI_Attack");
+    }
+
     public bool Invoke()
     {
-        _ai.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0);
+        if (_ai.currentNode != this)
+        {
+            _ai.currentNode.OnEnd();
+
+            OnStart();
+        }
+
+        if (!_ai.isAttack && _ai.curAtkTimer >= _ai.atkCoolTime)
+        {
+            _ai.animator.Play("AI_Attack", -1, 0f);
+            _ai.curAtkTimer = 0;
+        }
+        else if(!_ai.isAttack && _ai.curAtkTimer < _ai.atkCoolTime)
+        {
+            _ai.animator.Play("AI_Idle", -1, 0f);
+        }
 
         return true;
+    }
+
+    public void OnEnd()
+    {
+
     }
 }

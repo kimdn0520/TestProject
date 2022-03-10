@@ -11,10 +11,26 @@ public class AIIdle : Node
         _ai = ai;
     }
 
+    public void OnStart()
+    {
+        _ai.currentNode = this;
+        _ai.animator.Play("AI_Idle");  
+    }
+
     public bool Invoke()
     {
-        _ai.animator.Play("AI_Idle");   // 임시 
+        if (_ai.currentNode != this)
+        {
+            _ai.currentNode.OnEnd();
+
+            OnStart();
+        }
 
         return true;
+    }
+
+    public void OnEnd()
+    {
+
     }
 }

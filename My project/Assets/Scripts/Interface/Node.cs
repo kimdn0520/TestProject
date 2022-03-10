@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Node 
+public interface Node
 {
     bool Invoke();
+
+    void OnStart();
+
+    void OnEnd();
 }

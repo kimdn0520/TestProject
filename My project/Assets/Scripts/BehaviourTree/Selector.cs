@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Selector : CompositeNode, Node
 {
+    public void OnStart() {}
+
     public bool Invoke()
     {
         foreach (var node in GetChildren())
@@ -16,4 +18,6 @@ public class Selector : CompositeNode, Node
 
         return false;
     }
+
+    public void OnEnd() {}
 }

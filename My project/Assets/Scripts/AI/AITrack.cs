@@ -11,11 +11,23 @@ public class AITrack : Node
         _ai = ai;
     }
 
+    public void OnStart()
+    {
+        _ai.currentNode = this;
+        _ai.animator.Play("AI_Walk");
+    }
+
+
     public bool Invoke()
     {
-        _ai.animator.Play("AI_Walk");       // 다른데로 바꿔보장
+        if(_ai.currentNode != this)
+        {
+            _ai.currentNode.OnEnd();
+            
+            OnStart();
+        }
 
-        Vector2 trackNormalVec = (_ai.player.GetComponent<Transform>().position - _ai.GetComponent<Transform>().position).normalized;
+        Vector2 trackNormalVec = (_ai.player.transform.position - _ai.transform.position).normalized;
 
         // 이것도 일단 임시
         if (trackNormalVec.x < 0)
@@ -26,5 +38,10 @@ public class AITrack : Node
         _ai.transform.Translate(trackNormalVec * _ai.speed * Time.deltaTime);
 
         return true;
+    }
+
+    public void OnEnd()
+    {
+
     }
 }
